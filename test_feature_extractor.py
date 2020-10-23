@@ -76,6 +76,7 @@ class JPEG:
     
     def decode(self):
         data = self.img_data
+        print(data[1])
         marker_DQT_num = 0
         marker_DQT_size_max = 0
         marker_DHT_num = 0
@@ -86,6 +87,7 @@ class JPEG:
         marker_APP1_size_max = 0
         marker_COM_size_max = 0
         file_size = len(data)
+        print(f"file_size = {file_size}")
         while(True):
             try:
                 marker, = unpack(">H", data[0:2])
@@ -135,11 +137,14 @@ class JPEG:
                     data = data[2:]
                 elif marker <= 0xffd9 and marker >= 0xffd0:
                     data = data[2:]
+                elif marker <= 0xffbf and marker >= 0xff02:
+                    lenchunk, = unpack(">H", data[2:4])
+                    data = data[2+lenchunk:]
                 else:
                     lenchunk, = unpack(">H", data[2:4])
                     data = data[2+lenchunk:]
             else:
-                data = data[2:]
+                data = data[1:]
             if (len(data) == 0):
                  data_list = [marker_EOI_content_after_num,marker_DQT_num,marker_DHT_num,file_markers_num, marker_DQT_size_max, marker_DHT_size_max,file_size, marker_COM_size_max,marker_APP1_size_max,marker_APP12_size_max,0]
                # print(marker_DQT_num)
@@ -169,7 +174,7 @@ class JPEG:
           #      break        
 
 if __name__ == "__main__":
-    path = r'C:\Users\akshi\Desktop\rooney' # ute your path i.e the folder with csv files from ecg viewer
+    path = r'E:\malicious' # ute your path i.e the folder with csv files from ecg viewer
     all_files = glob.glob(path + "/*.jpg")
     all_data = []
     for filename in all_files:
@@ -181,7 +186,7 @@ if __name__ == "__main__":
     #columns = ["marker_EOI_content_after_num","marker_DQT_num","marker_DHT_num","file_markers_num", "marker_DQT_size_max", "marker_DHT_size_max","file_size", "marker_COM_size_max","marker_APP1_size_max","marker_APP12_size_max", "target"])
     df = pd.DataFrame(all_data, columns = ["marker_EOI_content_after_num","marker_DQT_num","marker_DHT_num","file_markers_num", "marker_DQT_size_max", "marker_DHT_size_max","file_size", "marker_COM_size_max","marker_APP1_size_max","marker_APP12_size_max", "target"])
     #input_df = pd.concat(all_data, axis=0, ignore_index=True)
-    df.to_csv('benign_features.csv', mode="w",index=False)
+    df.to_csv('malicious_features.csv', mode="w",index=False)
 # OUTPUT:
 # Start of Image
 # Application Default Header
