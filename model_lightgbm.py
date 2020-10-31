@@ -12,19 +12,19 @@ print('Loading data...')
 # y_test = df_test[0]
 # X_train = df_train.drop(0, axis=1)
 # X_test = df_test.drop(0, axis=1)
-train = pd.read_csv('dataset/benign_features.csv',header=None)
+train = pd.read_csv('train.csv',header=None)
 X_train = np.array(train.iloc[:, 0:9])
-X_train = X_train[1:]       
+# X_train = X_train[1:]       
 y_train = np.array(train.iloc[:,10])
-y_train = y_train[1:]
+# y_train = y_train[1:]
 
 # print("\n", len(X_train), "  ", len(y_train), "\n")
 
-test = pd.read_csv('dataset/malicious_features.csv',header=None)
+test = pd.read_csv('test.csv',header=None)
 X_test = np.array(test.iloc[:, 0:9])   
-X_test = X_test[1:]       
+# X_test = X_test[1:]       
 y_test = np.array(test.iloc[:,10])
-y_test = y_test[1:]
+# y_test = y_test[1:]
 
 # create dataset for lightgbm
 lgb_train = lgb.Dataset(X_train, y_train)
