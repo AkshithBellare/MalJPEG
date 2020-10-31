@@ -3,11 +3,11 @@ import numpy as np
 from sklearn import utils 
 from glob import glob
 
-train = pd.read_csv('train.csv',header=None)
+train = pd.read_csv('./dataset/train.csv',header=None)
 x_train = np.array(train.iloc[:, 0:9])        
 y_train = np.array(train.iloc[:,10])
 
-test = pd.read_csv('test.csv',header=None)
+test = pd.read_csv('./dataset/test.csv',header=None)
 x_test = np.array(test.iloc[:, 0:9])        
 y_test = np.array(test.iloc[:,10])
 

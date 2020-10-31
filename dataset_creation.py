@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 import glob 
 
-path_benign="/home/axebell/Desktop/theOne/year3CourseMaterials/se303/project/benign_features.csv" #update the paths here 
-path_malicious="/home/axebell/Desktop/theOne/year3CourseMaterials/se303/project/malicious_features.csv"
+path_benign="/home/axebell/Desktop/MalJPEG/dataset/benign_features.csv" #update the paths here 
+path_malicious="/home/axebell/Desktop/MalJPEG/dataset/malicious_features.csv"
 
 df_benign =pd.read_csv(path_benine,header=None) 
 df_benign=df_benine.iloc[1:,]
