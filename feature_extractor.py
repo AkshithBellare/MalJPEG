@@ -76,7 +76,6 @@ class JPEG:
     
     def decode(self):
         data = self.img_data
-        print(data[1])
         marker_DQT_num = 0
         marker_DQT_size_max = 0
         marker_DHT_num = 0
@@ -96,7 +95,6 @@ class JPEG:
             marker_map = marker_mapping.get(marker)
             if marker_map != None:
                 file_markers_num += 1
-                print(marker_map)
                 if marker_map == "DQT":
                     marker_DQT_num += 1
                     lenchunk, = unpack(">H", data[2:4])
@@ -117,7 +115,7 @@ class JPEG:
                         marker_EOI_content_after_num = len(rem)
                     data = rem
                 elif marker_map == "SOS":
-                    data = data[2:]
+                    data = data[-2:]
                 elif marker_map == "APP12":
                     lenchunk, = unpack(">H", data[2:4])
                     if lenchunk > marker_APP12_size_max:
@@ -147,55 +145,19 @@ class JPEG:
                 data = data[1:]
             if (len(data) == 0):
                  data_list = [marker_EOI_content_after_num,marker_DQT_num,marker_DHT_num,file_markers_num, marker_DQT_size_max, marker_DHT_size_max,file_size, marker_COM_size_max,marker_APP1_size_max,marker_APP12_size_max,0]
-               # print(marker_DQT_num)
-               # print(marker_DHT_num)
-               # print(file_markers_num)
-               # print(marker_EOI_content_after_num)
-               # print(marker_DQT_size_max)
-               # print(marker_DHT_size_max)
-               # print(file_size)
-               # print(marker_COM_size_max)
-               # print(marker_APP1_size_max)
-               # print(marker_APP12_size_max)
                  return data_list 
-          #  marker, = unpack(">H", data[0:2])
-          #  print(marker_mapping.get(marker))
-          #  print(hex(marker))
-          #  if marker == 0xffd8:
-          #      data = data[2:]
-          #  elif marker == 0xffd9:
-          #      return
-          #  elif marker == 0xffda:
-          #      data = data[-2:]
-          #  else:
-          #      lenchunk, = unpack(">H", data[2:4])
-          #      data = data[2+lenchunk:]            
-          #  if len(data)==0:
-          #      break        
 
 if __name__ == "__main__":
-    path = r'E:\malicious' # ute your path i.e the folder with csv files from ecg viewer
+    path = r'C:\Users\akshi\Desktop\theOne\benign' # ute your path i.e the folder with csv files from ecg viewer
     all_files = glob.glob(path + "/*.jpg")
     all_data = []
+    img_count = 0
     for filename in all_files:
+        img_count += 1
         img = JPEG(filename)
+        print(f"filename = {filename} img_count = {img_count}")
         data_list = img.decode()
         all_data.append(data_list)
-        print(filename)
     print(all_data)
-    #columns = ["marker_EOI_content_after_num","marker_DQT_num","marker_DHT_num","file_markers_num", "marker_DQT_size_max", "marker_DHT_size_max","file_size", "marker_COM_size_max","marker_APP1_size_max","marker_APP12_size_max", "target"])
     df = pd.DataFrame(all_data, columns = ["marker_EOI_content_after_num","marker_DQT_num","marker_DHT_num","file_markers_num", "marker_DQT_size_max", "marker_DHT_size_max","file_size", "marker_COM_size_max","marker_APP1_size_max","marker_APP12_size_max", "target"])
-    #input_df = pd.concat(all_data, axis=0, ignore_index=True)
-    df.to_csv('malicious_features.csv', mode="w",index=False)
-# OUTPUT:
-# Start of Image
-# Application Default Header
-# Quantization Table
-# Quantization Table
-# Start of Frame
-# Huffman Table
-# Huffman Table
-# Huffman Table
-# Huffman Table
-# Start of Scan
-# End of Image
+    df.to_csv('benign_features.csv', mode="w",index=False)
