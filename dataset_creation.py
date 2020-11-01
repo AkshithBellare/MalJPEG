@@ -5,8 +5,8 @@ import glob
 path_benign="/home/axebell/Desktop/MalJPEG/dataset/benign_features.csv" #update the paths here 
 path_malicious="/home/axebell/Desktop/MalJPEG/dataset/malicious_features.csv"
 
-df_benign =pd.read_csv(path_benine,header=None) 
-df_benign=df_benine.iloc[1:,]
+df_benign =pd.read_csv(path_benign,header=None) 
+df_benign=df_benign.iloc[1:,]
 train_benign, test_benign = np.split(df_benign.sample(frac=1), [int(.75*len(df_benign))]) 
 
 df_malicious =pd.read_csv(path_malicious,header=None) 
