@@ -1,10 +1,12 @@
-Implementation of the MalJPEG paper published in IEEE Xplore by Avaid Cohen et al. in January 2020.
+Implementation of MalJPEG solution for the detection of malicious images , based on A. Cohen, N. Nissim and Y. Elovici, "MalJPEG: Machine Learning Based Solution for the Detection of Malicious JPEG Images," in IEEE Access, vol. 8, pp. 19997-20011, 2020, doi: 10.1109/ACCESS.2020.2969022.
+Link to the paper: https://ieeexplore.ieee.org/document/8967109
 
-Language -> Python
+Dataset: For benign images https://www.kaggle.com/hsankesara/flickr-image-dataset
+         For malicious images we used https://virusshare.com/
+
+Language -> Python3.8
 
 We have implemented the main proposal of extracting the MalJPEG features from a JPEG and training them on different ML Models.
-
-The malicious images were obtained from virusshare.com, and the benign images from a Kaggle dataset.
 
 Install the required libraries using:
 
