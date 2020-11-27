@@ -231,16 +231,16 @@ def light_gbm(x_train, y_train, x_test, y_test):
             y_test[i] = 1
     
     #plot ROC curve
-    plt.figure()
-    false_positive_rate, recall, thresholds = roc_curve(y_test, predictions_lgbm_prob)
-    roc_auc = auc(false_positive_rate, recall)
-    plt.plot(false_positive_rate, recall, 'b', label = 'LGBMClassifier(AUC = %0.3f)' %roc_auc)
-    plt.legend(loc='lower right')
-    plt.xlim([0.0,1.0])
-    plt.ylim([0.0,1.0])
-    plt.ylabel('True Positive Rate')
-    plt.xlabel('False Positive Rate')
-    plt.show()
+    #plt.figure()
+    #false_positive_rate, recall, thresholds = roc_curve(y_test, predictions_lgbm_prob)
+    #roc_auc = auc(false_positive_rate, recall)
+    #plt.plot(false_positive_rate, recall, 'b', label = 'LGBMClassifier(AUC = %0.3f)' %roc_auc)
+    #plt.legend(loc='lower right')
+    #plt.xlim([0.0,1.0])
+    #plt.ylim([0.0,1.0])
+    #plt.ylabel('True Positive Rate')
+    #plt.xlabel('False Positive Rate')
+    #plt.show()
 
     predictions_lgbm = [ele * 100 for ele in predictions_lgbm_01]
     y_test = [ele * 100 for ele in y_test]
@@ -364,7 +364,7 @@ def main():
         plt.text(bar.get_x(), yval + .005, yval )
 
     plt.tight_layout()
-    plt.show()  
+    plt.savefig('5050comparison.png')  
 
 if __name__=='__main__':
     main()
