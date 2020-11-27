@@ -8,13 +8,15 @@ Language -> Python3.8
 
 We have implemented the main proposal of extracting the MalJPEG features from a JPEG and training them on different ML Models.
 
+On an Ubuntu machine, 
+
 Install the required libraries using:
 
         pip3 install -r requirements.txt
 
 Run the feature extractor on a directory of images:
 
-        python3 feature_extractor.py /path/to/file
+        python3 feature_extractor.py /path/to/file type_of_data
 
 Next to create the datasets:
 

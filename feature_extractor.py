@@ -1,5 +1,6 @@
 from struct import unpack
 import pandas as pd
+import sys
 import glob
 
 marker_mapping = {
@@ -148,7 +149,9 @@ class JPEG:
                  return data_list 
 
 if __name__ == "__main__":
-    path = r'C:\Users\akshi\Desktop\theOne\benign' # ute your path i.e the folder with csv files from ecg viewer
+    path = sys.argv[1] # update your path i.e the folder with csv files from ecg viewer
+    typ = sys.argv[2] #benign or malicious
+    print(path, typ)
     all_files = glob.glob(path + "/*.jpg")
     all_data = []
     img_count = 0
@@ -160,4 +163,4 @@ if __name__ == "__main__":
         all_data.append(data_list)
     print(all_data)
     df = pd.DataFrame(all_data, columns = ["marker_EOI_content_after_num","marker_DQT_num","marker_DHT_num","file_markers_num", "marker_DQT_size_max", "marker_DHT_size_max","file_size", "marker_COM_size_max","marker_APP1_size_max","marker_APP12_size_max", "target"])
-    df.to_csv('benign_features.csv', mode="w",index=False)
+    df.to_csv("./dataset/"+sys.argv[2]+'_features.csv', mode="w",index=False)
