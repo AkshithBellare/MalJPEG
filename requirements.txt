@@ -3,3 +3,4 @@ matplotlib
 xgboost
 sklearn
 pandas
+lightgbm
