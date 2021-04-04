@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import glob 
 
 path_benign="./dataset/benign_features.csv" #update the paths here 
 path_malicious="./dataset/malicious_features.csv"
